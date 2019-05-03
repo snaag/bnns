@@ -16,12 +16,14 @@ seasons = seasons_and_episodes.keys()
 episodes = seasons_and_episodes.values()
 name = 'Brooklyn-nine-nine'
 base_url = 'https://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=brooklyn-nine-nine&episode='
+title = ""
 
 # Information about SAVE
 save_url = ""
 
 # Information about scripts
-stop_words = ['<div class="scrolling-script-container">','                   			 ','</div>','[',']','                   			','                   			']
+title_stop_words = ['[','<h3>','</h3>',']']
+script_stop_words = ['<div class="scrolling-script-container">','                   			 ','</div>','[',']','                   			','                   			']
 
 # Make folder
 def createFolder(directory):
@@ -68,14 +70,24 @@ for item in seasons_and_episodes.items():
 		# 이 글에서는 Python 내장 html.parser를 이용했다.
 		soup = BeautifulSoup(html, 'html.parser')
 
+		title = soup.select(
+			'div.main-content > div.main-content-left > h3'
+			)
 		txt = soup.select(
 			'div.main-content > div.main-content-left > div.episode_script > div.scrolling-script-container'
 			)
 
+		title = str(title)
 		scripts = str(txt)
 		scripts = scripts.replace("<br/>","\n\n")
-		for w in stop_words:
+		for w in title_stop_words:
+			title = title.replace(w,"")
+		for w in script_stop_words:
 			scripts = scripts.replace(w, "")
+
 		
+		f.write(inform.upper()+" : "+title)
 		f.write(scripts)
 		f.close()
+
+		#content_container > div.main-content > div.main-content-left > h3
