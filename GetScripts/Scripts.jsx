@@ -32,12 +32,18 @@ const Scripts = () => {
     try {
       const html = await axios.get(cors_url+base_url,{headers: {'Access-Control-Allow-Origin': '*'}});
 
-      const str = html.data.replace(/<br> /g, '\n');
-      let $ = cheerio.load(str);
-      const seasons = $('#content_container > div.main-content > div.main-content-left > div:nth-child(7)').text().trim();
+      // const str = html.data.replace(/<br> /g, '\n');
+
+
+      // dowajooseyoooooo
+      const document = html.data;
+      console.log(document.querySelector('.season-episodes').length);
+
+      // let $ = cheerio.load(str);
+      // const seasons = $('#content_container > div.main-content > div.main-content-left > div:nth-child(7)').text().trim();
       // document를 얻어와서 document.querySelectorAll('.season-episodes').length;를 쓰고싶은데 어떡하지
 
-      console.log(seasons);
+      // console.log(seasons);
 
     } catch (error) {
       console.log(error);
