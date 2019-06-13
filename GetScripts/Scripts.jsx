@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 const cheerio = require('cheerio');
 const axios = require('axios');
+import style from './Script.module.css';
 
 const Scripts = () => {
   const [seasons, setSeasons] = useState([]);
@@ -53,9 +54,10 @@ const Scripts = () => {
 
   };
 
-  const showEpisode = (e) => {
+  const clickSeason = (e) => {
+    console.log("clickSeason");
     click.current = true;
-    const idx = e.target.name - 1; // episode 정보에 접근할 index. 왜냐하면 episode[] 는 각 [[s1의 eps], [s2의 eps]..] 로 되어있어서
+    const idx = e.target.name - 1;
 
     setSeasonIdx(idx+1);
 
@@ -79,7 +81,6 @@ const Scripts = () => {
     seasonIdx > 9 ? info+=seasonIdx : info+="0"+seasonIdx ;
     info = info + "e";
     episodeIdx > 9 ? info+=episodeIdx : info+="0"+episodeIdx ;
-    scriptClicked.current = true;
 
     try {
       const html = await axios.get(
@@ -95,8 +96,7 @@ const Scripts = () => {
       const scripts = $('div.scrolling-script-container')
         .text()
         .trim();
-      // console.log(title);
-      console.log(scripts);
+
       setTitle(title);
       setScript(scripts);
     } catch (error) {
@@ -104,6 +104,9 @@ const Scripts = () => {
     }
   };
 
+  const clickDownload = () => {
+
+  };
 
   useEffect(() => {
     if(episodeIdx > 0) {
@@ -112,25 +115,29 @@ const Scripts = () => {
   },[episodeIdx]);
 
   useEffect(() => {
+    scriptClicked.current = true;
+  },[seasonIdx]);
+
+
+  useEffect(() => {
 
     if (!mounted.current) { // componentDidMount
       mounted.current = true;
       getSeasons();
     } else { // componentDidUpdate
-
     }
   }, [seasons]);
   return (
     <>
       {episodes.current.length<1 ?
-        <h1 className="loadingPage">Loading...</h1>:
+        <h1 className={style.loadingPage}>Loading...</h1>:
         <div>
-          {episodeIdx > 0 && <p className="info">You choose the {seasonIdx}-{episodeIdx}</p>}
+          {/*{episodeIdx > 0 && <p className="info">You choose the {seasonIdx}-{episodeIdx}</p>}*/}
           <h2>Seasons</h2>
           <h3>
             {seasons.map((v) => {
               return (
-                <button className="season" name={/\d+/.exec(v)} onClick={showEpisode}>{v}</button>
+                <button className="season" name={/\d+/.exec(v)} onClick={clickSeason}>{v}</button>
               )
             })}
           </h3>
@@ -149,11 +156,12 @@ const Scripts = () => {
       }
 
       {
-        scriptClicked.current &&
+        (scriptClicked.current && click.current) &&
           (title.length < 2 ?
-            <h4 className="loadingScript">Waiting for scripts loading...</h4> :
+              <h4 className="loadingScript">S{seasonIdx}-E{episodeIdx} script is loading...</h4> :
               <div className="scriptPart">
                 <pre className="title">{title}</pre>
+                <button className="download" onClick={clickDownload}>download</button>
                 <pre className="script">{script}</pre>
               </div>
           )
