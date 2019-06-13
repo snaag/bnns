@@ -62,6 +62,7 @@ const Scripts = () => {
     setSeasonIdx(idx+1);
 
     setEpisodeNow(episodes.current[idx]);
+    setEpisodeIdx(-1);
 
     scriptClicked.current = false;
     setTitle('');
@@ -97,7 +98,7 @@ const Scripts = () => {
         .text()
         .trim();
       // console.log(title);
-      // console.log(scripts);
+      console.log(scripts);
       setTitle(title);
       setScript(scripts);
     } catch (error) {
@@ -153,13 +154,6 @@ const Scripts = () => {
         </div>
       }
 
-      {/*{(script.length > 2 && title.length > 2) &&*/}
-      {/*  <div>*/}
-      {/*    <h4>{title}</h4>*/}
-      {/*    <h4>This is script</h4>*/}
-      {/*  </div>*/}
-      {/*}*/}
-
       {
         scriptClicked.current &&
           (title.length < 2 ?
@@ -168,8 +162,6 @@ const Scripts = () => {
                 <h4 className="title">{title}</h4>
                 <h5 className="script">{script}</h5>
               </div>
-
-
           )
       }
 
