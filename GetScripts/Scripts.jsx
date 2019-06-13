@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 const cheerio = require('cheerio');
 const axios = require('axios');
-import styled from 'styled-components';
+// import styled from './Script.css';
+// const StyledH1 = styled.h1`
+//   margin: 40px;
+//   border: 5px dotted blue;
 
-const StyledH1 = styled.h1`
-  margin: 40px;
-  border: 5px dotted blue;
-`;
 
 const Scripts = () => {
   const [seasons, setSeasons] = useState([]);
@@ -25,6 +24,9 @@ const Scripts = () => {
     'https://www.springfieldspringfield.co.uk/episode_scripts.php?tv-show=brooklyn-nine-nine';
   const scriptUrl =
     'https://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=brooklyn-nine-nine&episode=';
+
+  const imgUrl =
+    'https://www.springfieldspringfield.co.uk/view-screencap.php?tv-show=brooklyn-nine-nine-2013&image=';
 
   const getSeasons = async () => {
     try {
@@ -57,6 +59,7 @@ const Scripts = () => {
       console.error(error);
     }
   };
+
 
   const clickSeason = e => {
     console.log('clickSeason');
@@ -106,8 +109,6 @@ const Scripts = () => {
     }
   };
 
-  const clickDownload = () => {};
-
   useEffect(() => {
     if (episodeIdx > 0) {
       getScripts();
@@ -130,15 +131,14 @@ const Scripts = () => {
   return (
     <>
       {episodes.current.length < 1 ? (
-        <StyledH1>Loading...</StyledH1>
+        <div className="loadingPage"> </div>
       ) : (
         <div>
           {/*{episodeIdx > 0 && <p className="info">You choose the {seasonIdx}-{episodeIdx}</p>}*/}
-          <h2>Seasons</h2>
           <h3>
             {seasons.map(v => {
               return (
-                <button className="season" name={/\d+/.exec(v)} onClick={clickSeason}>
+                <button className="btnSeason bgc-black c-white font-overpassMono" name={/\d+/.exec(v)} onClick={clickSeason}>
                   {v}
                 </button>
               );
@@ -149,31 +149,26 @@ const Scripts = () => {
 
       {click.current && (
         <div>
-          <h2>Episodes</h2>
           {episodeNow.map(v => {
             return (
-              <li>
-                <button className="episode" name={/^\d+/.exec(v)} onClick={clickEpisode}>
+                <button className="btnEpisode bgc-yellow c-black font-cutiveMono" name={/^\d+/.exec(v)} onClick={clickEpisode}>
                   {v}
                 </button>
-              </li>
             );
           })}
+          <h1> </h1>
         </div>
       )}
 
       {scriptClicked.current &&
         click.current &&
         (title.length < 2 ? (
-          <h4 className="loadingScript">
+          <h4 className="loadingScript font-overpassMono">
             S{seasonIdx}-E{episodeIdx} script is loading...
           </h4>
         ) : (
           <div className="scriptPart">
             <pre className="title">{title}</pre>
-            <button className="download" onClick={clickDownload}>
-              download
-            </button>
             <pre className="script">{script}</pre>
           </div>
         ))}

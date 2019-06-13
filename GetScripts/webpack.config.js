@@ -5,8 +5,9 @@ module.exports = {
   mode: 'development',
   devtool: 'eval',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css'],
   },
+
   entry: {
     app: './client',
   },
@@ -24,6 +25,10 @@ module.exports = {
           ],
         },
         exclude: path.join(__dirname, 'node_modules'),
+      },
+      {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
     ],
   },
