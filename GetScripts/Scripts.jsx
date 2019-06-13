@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 const cheerio = require('cheerio');
 const axios = require('axios');
 
-//https://jongmin92.github.io/2017/05/26/Emily/4-crawling/
 const Scripts = () => {
   const [seasons, setSeasons] = useState([]);
   const [seasonIdx, setSeasonIdx] = useState(-1);
@@ -11,16 +10,15 @@ const Scripts = () => {
   const episodes = useRef([]);
   const mounted = useRef(false);
   const click = useRef(false);
+  const [script, setScript] = useState('');
+  const [title, setTitle] = useState('');
+  const scriptClicked = useRef(false);
+
   const cors_url = 'https://cors-anywhere.herokuapp.com/';
   const bnn_url =
     'https://www.springfieldspringfield.co.uk/episode_scripts.php?tv-show=brooklyn-nine-nine';
   const scriptUrl =
     'https://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=brooklyn-nine-nine&episode=';
-
-  const [script, setScript] = useState('');
-  const [title, setTitle] = useState('');
-  const scriptClicked = useRef(false);
-
 
 
   const getSeasons = async () => {
@@ -106,8 +104,6 @@ const Scripts = () => {
     }
   };
 
-  useEffect(() => {
-  },[episodeNow, seasonIdx]);
 
   useEffect(() => {
     if(episodeIdx > 0) {
@@ -117,12 +113,10 @@ const Scripts = () => {
 
   useEffect(() => {
 
-    // componentDidMount
-    if (!mounted.current) {
+    if (!mounted.current) { // componentDidMount
       mounted.current = true;
       getSeasons();
-    } else {
-      // componentDidUpdate
+    } else { // componentDidUpdate
 
     }
   }, [seasons]);
@@ -158,13 +152,12 @@ const Scripts = () => {
         scriptClicked.current &&
           (title.length < 2 ?
             <h4 className="loadingScript">Waiting for scripts loading...</h4> :
-              <div>
-                <h4 className="title">{title}</h4>
-                <h5 className="script">{script}</h5>
+              <div className="scriptPart">
+                <pre className="title">{title}</pre>
+                <pre className="script">{script}</pre>
               </div>
           )
       }
-
     </>
   );
 };
