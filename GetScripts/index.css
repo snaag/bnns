@@ -1,6 +1,5 @@
-
 .loadingPage {
-    background-image: url(./Resources/loading.gif);
+    /* background-image: url(./Resources/loading.gif); */
     height: 200px;
     width: 200px;
 }
@@ -81,4 +80,3 @@
 .font-overpassMono {
     font-family: 'Overpass Mono', monospace;
 }
-
