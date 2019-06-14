@@ -2,7 +2,7 @@ const path = require('path');
 const htmlList = ['index'];
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const htmlPlugins = htmlList.map(function(htmlName) {
+const htmlPlugins = htmlList.map(function (htmlName) {
   return new HtmlWebpackPlugin({
     filename: `${htmlName}.html`,
     template: `./${htmlName}.html`,
@@ -20,11 +20,10 @@ module.exports = {
   },
 
   entry: {
-    app: './client',
+    index: './client',
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
@@ -39,7 +38,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        }],
       },
     ],
   },
@@ -47,7 +50,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
-    publicPath: '/build',
+    publicPath: '/GetScripts/build',
   },
   node: {
     fs: 'empty',
