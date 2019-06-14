@@ -1,8 +1,19 @@
 const path = require('path');
+const htmlList = ['index'];
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const htmlPlugins = htmlList.map(function(htmlName) {
+  return new HtmlWebpackPlugin({
+    filename: `${htmlName}.html`,
+    template: `./${htmlName}.html`,
+    hash: true,
+    chunks: [`${htmlName}`],
+  });
+});
 
 module.exports = {
   name: 'getscripts',
-  mode: 'development',
+  mode: 'production',
   devtool: 'eval',
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
@@ -32,7 +43,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
+  plugins: [].concat(htmlPlugins),
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
