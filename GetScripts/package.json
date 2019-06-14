@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "predeploy":"npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build"
   },
   "author": "snaag",
   "license": "ISC",
