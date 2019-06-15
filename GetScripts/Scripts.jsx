@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 const cheerio = require('cheerio');
 const axios = require('axios');
+import img from './Resources/loading.gif'
 // const StyledH1 = styled.h1`
 //   margin: 40px;
 //   border: 5px dotted blue;
@@ -130,7 +131,9 @@ const Scripts = () => {
   return (
     <>
       {episodes.current.length < 1 ? (
-        <div className="loadingPage"> </div>
+        <div>
+          <img className="loadingImg" src={img} alt=""/>
+        </div>
       ) : (
         <div>
           {/*{episodeIdx > 0 && <p className="info">You choose the {seasonIdx}-{episodeIdx}</p>}*/}

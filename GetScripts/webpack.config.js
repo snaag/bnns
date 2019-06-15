@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   name: 'getscripts',
@@ -30,7 +29,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
-      }
+      },
+      {
+      test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'url-loader',
+      options: {
+        name: '[hash].[ext]',
+        limit: 10000,
+      },
+    }
     ],
   },
   plugins: [new HtmlWebpackPlugin({
@@ -44,7 +51,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
-    publicPath: '/GetScripts/build',
+    publicPath: '/build',
   },
   node: {
     fs: 'empty',
