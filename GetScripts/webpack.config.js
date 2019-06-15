@@ -13,7 +13,8 @@ module.exports = {
     index: './index',
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
@@ -28,26 +29,28 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
-      test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: 'url-loader',
-      options: {
-        name: '[hash].[ext]',
-        limit: 10000,
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
       },
-    }
     ],
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'bnns',
-    minify: {
-      collapseWhitespace: false
-    },
-    hash: true,
-    template: './index.html'
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'bnns',
+      minify: {
+        collapseWhitespace: false,
+      },
+      hash: true,
+      template: './index.html',
+    }),
+  ],
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
