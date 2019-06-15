@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 const cheerio = require('cheerio');
 const axios = require('axios');
-// import styled from './Script.css';
 // const StyledH1 = styled.h1`
 //   margin: 40px;
 //   border: 5px dotted blue;

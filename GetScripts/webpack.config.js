@@ -1,15 +1,6 @@
 const path = require('path');
-const htmlList = ['index'];
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const htmlPlugins = htmlList.map(function(htmlName) {
-  return new HtmlWebpackPlugin({
-    filename: `${htmlName}.html`,
-    template: `./${htmlName}.html`,
-    hash: true,
-    chunks: [`${htmlName}`],
-  });
-});
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   name: 'getscripts',
@@ -20,11 +11,10 @@ module.exports = {
   },
 
   entry: {
-    app: './client',
+    index: './index',
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
@@ -39,15 +29,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-      },
+        use: ['style-loader', 'css-loader']
+      }
     ],
   },
-  plugins: [].concat(htmlPlugins),
+  plugins: [new HtmlWebpackPlugin({
+    title: 'bnns',
+    minify: {
+      collapseWhitespace: false
+    },
+    hash: true,
+    template: './index.html'
+  })],
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
-    publicPath: '/build',
+    publicPath: '/GetScripts/build',
   },
   node: {
     fs: 'empty',
