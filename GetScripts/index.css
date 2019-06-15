@@ -1,82 +1,79 @@
 .loadingPage {
-    /* background-image: url(./Resources/loading.gif); */
-    height: 200px;
-    width: 200px;
+  background-image: url(./Resources/loading.gif);
+  height: 200px;
+  width: 200px;
 }
 
 .btnSeason {
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    margin: 10px;
-    opacity: 0.7;
-    transition: 0.5s;
+  border-radius: 10px;
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+  opacity: 0.7;
+  transition: 0.5s;
 }
 
 .btnSeason:hover {
-    box-shadow: 0 5px gray;
-    opacity: 1;
+  box-shadow: 0 5px gray;
+  opacity: 1;
 }
 
 .btnSeason:active {
-    box-shadow: 0 10px gray;
+  box-shadow: 0 10px gray;
 }
 
-
 .btnEpisode {
-    border-radius: 10px;
-    height: 40px;
-    margin: 10px;
-    opacity: 0.7;
-    transition: 0.5s;
+  border-radius: 10px;
+  height: 40px;
+  margin: 10px;
+  opacity: 0.7;
+  transition: 0.5s;
 }
 
 .btnEpisode:hover {
-    box-shadow: 0 5px darkorange;
-    opacity: 1;
+  box-shadow: 0 5px darkorange;
+  opacity: 1;
 }
 
 .btnEpisode:active {
-    box-shadow: 0 10px darkorange;
+  box-shadow: 0 10px darkorange;
 }
 
-
 .loadingScript {
-    margin: 10px;
+  margin: 10px;
 }
 
 .scriptPart {
-    margin: 10px;
+  margin: 10px;
 }
 
 .bgc-yellow {
-    border: none;
-    background-color: #FEE14D;
+  border: none;
+  background-color: #fee14d;
 }
 
 .bgc-black {
-    border: none;
-    background-color: #000000;
+  border: none;
+  background-color: #000000;
 }
 
 .bgc-white {
-    border: none;
-    background-color: #ffffff;
+  border: none;
+  background-color: #ffffff;
 }
 
 .c-white {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .c-black {
-    color: #000000;
+  color: #000000;
 }
 
-
 .font-cutiveMono {
-    font-family: 'Cutive Mono', monospace;
+  font-family: 'Cutive Mono', monospace;
 }
 
 .font-overpassMono {
-    font-family: 'Overpass Mono', monospace;
+  font-family: 'Overpass Mono', monospace;
 }
